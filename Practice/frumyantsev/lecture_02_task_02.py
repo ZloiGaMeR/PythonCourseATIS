@@ -8,9 +8,13 @@ def max_value(num1, num2):
         return num1
     elif num1 < num2:
         return num2
+    else:
+        return None
 
 
 returned_result_1 = max_value(15, 12)
 returned_result_2 = max_value(-23, -3)
+returned_result_3 = max_value(-1, -1)
 print(returned_result_1)
 print(returned_result_2)
+print(returned_result_3)

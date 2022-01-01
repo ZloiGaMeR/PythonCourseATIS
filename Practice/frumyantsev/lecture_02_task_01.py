@@ -7,7 +7,11 @@ def max_value(num1, num2):
         print(num1)
     elif num1 < num2:
         print(num2)
+    else:
+        print("Числа равны")
+    return None
 
 
 max_value(5, 12)
 max_value(23, -3)
+max_value(10, 10)
