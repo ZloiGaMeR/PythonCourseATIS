@@ -1,4 +1,13 @@
-max_value = lambda x = input("Key in value1: "), y = input("Key in value2: "): print(max(x,y))
-
-max_value()
+# max_value = lambda x = input("Key in value1: "), y = input("Key in value2: "): print(max(x,y))
 #
+# max_value()
+
+def max_value(num1, num2):
+    if num1 > num2:
+        print(num1)
+    elif num1 < num2:
+        print(num2)
+
+
+max_value(5, 12)
+max_value(23, -3)
