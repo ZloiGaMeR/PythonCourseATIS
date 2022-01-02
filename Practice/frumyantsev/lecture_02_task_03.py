@@ -7,12 +7,11 @@ ARMY = ["Soviet", "German", "US", "France", "UK"]
 
 
 class Tank:
-    def __init__(self, load_regular : int, load_explosive : int, model = 'T34', technical_state = '10'):
+    def __init__(self, load_regular: int, load_explosive: int, model='T34', technical_state='10'):
         self.model = model
         self.technical_state = technical_state # should vary from 10 (new tank) to 0 (completely destroyed)
         self.load_regular = load_regular # regular weapon load
         self.load_explosive = load_explosive # explosive weapon load
-        return None
 
     def tank_turn(self, angle):
         """
@@ -44,7 +43,7 @@ class Tank:
         self.angle = angle
 
 class Battlefield:
-    def __init__(self, map = MAP[0], weather = WEATHER[0], time_of_day = TIME_OF_DAY[0]):
+    def __init__(self, map=MAP[0], weather=WEATHER[0], time_of_day=TIME_OF_DAY[0]):
         self.map = map
         self.weather = weather
         self.time_of_day = time_of_day
@@ -63,7 +62,7 @@ class Map:
         self.length = length
 
 class Army:
-    def __init__(self, army = ARMY[0]):
+    def __init__(self, army=ARMY[0]):
         self.army = army
 
 class Position:
@@ -73,7 +72,8 @@ class Position:
         self.orientation = orientation
 
 class HeavyTank(Tank):
-    def __init__(self, extra_armor):
+    def __init__(self, model, extra_armor, load_regular=10, load_explosive=10, technical_state='10'):
+        super().__init__(load_regular, load_explosive, model, technical_state)
         self.extra_armor = extra_armor
 
 print(Tank.tank_turn.__doc__)
@@ -81,7 +81,7 @@ print(Tank.tank_rotate.__doc__)
 
 battlefield_1 = Battlefield()
 tank_1 = Tank(5, 5)
-heavy_tank_1 = HeavyTank("armor_level_5")
+heavy_tank_1 = HeavyTank("Panther", "armor_level_5")
 # не понятно, почему при создании нового объекта дочернего класса HeavyTank не потребовалось
 # задавать переменные load_regular, load_explosive родительского класса Tank
 print(tank_1.__dict__)
