@@ -1,7 +1,10 @@
-def max(a, b):
-    if a > b:
+def return_max(a, b):
+    if a >= b:
         return a
     else:
         return b
 
-print(max(5, 3))
+
+num1 = input('введите первое число: ')
+num2 = input('введите второе число: ')
+print(return_max(num1, num2))

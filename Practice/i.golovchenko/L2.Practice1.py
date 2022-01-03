@@ -1,7 +1,8 @@
-def fun(a, b):
-    if a > b:
-        print("max number = ", a)
+def print_max(a, b):
+    if a >= b:
+        print(f"max number = {a}")
     else:
-        print("max number = ", b)
+        print(f"max number = {b}")
 
-fun(5, 1)
+
+print_max(1, 1)
