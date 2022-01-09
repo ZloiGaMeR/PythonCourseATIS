@@ -2,7 +2,8 @@ def is_palindrome(s):
     """ (str) -> bool
     Check if keyed in string is palindrome. Return True or False
     """
-    return True if str(s).lower() == str(s[::-1]).lower() else False
+    s = str(s).lower()
+    return True if s == s[::-1] else False
 
 
 print(is_palindrome("1"))
