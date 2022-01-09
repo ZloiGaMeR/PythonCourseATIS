@@ -5,6 +5,6 @@ def return_max(a, b):
         return b
 
 
-num1 = input('введите первое число: ')
-num2 = input('введите второе число: ')
+num1 = int(input('введите первое число: '))
+num2 = int(input('введите второе число: '))
 print(return_max(num1, num2))
