@@ -7,7 +7,7 @@ def put_together_number():
         entered_data = input("Введите числовой символ: ")
         if entered_data.isdecimal():
             concatenated_number += entered_data
-        elif entered_data in ["stop", "Stop", "STOP"]:
+        elif entered_data in {"stop", "Stop", "STOP"}:
             break
         else:
             continue
