@@ -1,2 +1,2 @@
-name = input("введите имя: ")
+name = input("Введите имя: ")
 print(f"Привет, {name}")
