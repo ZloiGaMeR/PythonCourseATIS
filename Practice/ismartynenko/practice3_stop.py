@@ -3,7 +3,7 @@ stroka_l = stroka.lower()
 number = ' '
 stopkey = "stop"
 
-while stroka_l.find(stopkey) == -1:
+while stopkey not in stroka_l:
     if stroka_l.isdigit():
         number += stroka_l
     else:

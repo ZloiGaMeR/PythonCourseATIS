@@ -1,6 +1,6 @@
 def check(word):
     backword = word[::-1]
-    if word == backword:
+    if word.lower() == backword.lower():
         print("Palindrom")
     else:
         print("Not the palindrom")
@@ -8,4 +8,4 @@ def check(word):
 
 
 word = input("Input word: ")
-check(word.lower())
+check(word)
