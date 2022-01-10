@@ -10,30 +10,30 @@ class Tank:
                                 self.start_pos_tank[0] + 1, self.start_pos_tank[1]]
 
     # движение танка с помощью клавиш W/A/S/D
-    def move(tank, key, speed):
+    def move(self, key, speed):
         if key == 119:
             print("Вы нажали вверх")
-            tank.start_pos_tank[1] += speed
-            tank.start_pos_tower[1] += speed
-            tank.start_pos_tower[3] += speed
+            self.start_pos_tank[1] += speed
+            self.start_pos_tower[1] += speed
+            self.start_pos_tower[3] += speed
             return True
         elif key == 97:
             print("Вы нажали влево")
-            tank.start_pos_tank[0] -= speed
-            tank.start_pos_tower[0] -= speed
-            tank.start_pos_tower[2] -= speed
+            self.start_pos_tank[0] -= speed
+            self.start_pos_tower[0] -= speed
+            self.start_pos_tower[2] -= speed
             return True
         elif key == 115:
             print("Вы нажали вниз")
-            tank.start_pos_tank[1] -= speed
-            tank.start_pos_tower[1] -= speed
-            tank.start_pos_tower[3] -= speed
+            self.start_pos_tank[1] -= speed
+            self.start_pos_tower[1] -= speed
+            self.start_pos_tower[3] -= speed
             return True
         elif key == 100:
             print("Вы нажали вправо")
-            tank.start_pos_tank[0] += speed
-            tank.start_pos_tower[0] += speed
-            tank.start_pos_tower[2] += speed
+            self.start_pos_tank[0] += speed
+            self.start_pos_tower[0] += speed
+            self.start_pos_tower[2] += speed
             return True
         else:
             print("Вы ввели недопустимую команду!")
@@ -59,9 +59,9 @@ for i in range(0, n):
     print("Текущее положение танка A на поле - ", a.start_pos_tank, "и его дула - ", a.start_pos_tower)
     print("Текущее положение танка B на поле - ", b.start_pos_tank, "и его дула - ", b.start_pos_tower)
     key_a = ord(input("Танк A - введите направление движения: "))
-    while not Tank.move(a, key_a, speed):
+    while not a.move(key_a, speed):
         key_a = ord(input("Танк A - введите направление движения: "))
 
     key_b = ord(input("Танк B - введите направление движения: "))
-    while not Tank.move(b, key_b, speed):
+    while not b.move(key_b, speed):
         key_b = ord(input("Танк B - введите направление движения: "))

@@ -1,12 +1,15 @@
-str = input("Input a number: ")
+stroka = input("Input a number: ")
+stroka_l = stroka.lower()
 number = ' '
+stopkey = "stop"
 
-while str.find("STOP") == -1:
-    if str.isdigit():
-        number += str
+while stroka_l.find(stopkey) == -1:
+    if stroka_l.isdigit():
+        number += stroka_l
     else:
         print("You are input not a number, try again")
-    str = input("Input a number: ")
+    stroka = input("Input a number: ")
+    stroka_l = stroka.lower()
 
-num = int(number.lstrip())
+num = number.lstrip()
 print(num)
