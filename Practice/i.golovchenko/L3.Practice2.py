@@ -1,8 +1,10 @@
-def palindrome(a):
-    if a == a[::-1]:
-        return a[::-1]
-    else:
-        print(f"Введеное слово: {a} - не палидром")
+word = input("Введите слово: ")
 
-word = str(input("Введите слово: "))
+def palindrome(a):
+    if a.lower() == a[::-1].lower():
+        return True
+    else:
+        return False
+
 print(palindrome(word))
+print(type(word))
