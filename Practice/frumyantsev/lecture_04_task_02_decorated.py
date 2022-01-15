@@ -5,10 +5,9 @@ def string_slicer(func):
 
     def wrapper(*args, **kwargs):
         a = func(*args, **kwargs)
-        five_digit_number = [(i+1, a[i]) for i in range(len(a))]
-        for item in five_digit_number:
-            print(f"{item[0]} цифра равна {item[1]}")
-        return None
+        for item in range(len(a)):
+            print(f"{item+1} цифра равна {a[item]}")
+        return a
 
     return wrapper
 

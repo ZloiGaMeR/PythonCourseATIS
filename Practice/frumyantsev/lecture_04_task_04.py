@@ -12,19 +12,23 @@ def whitespace_switch(string_or_file):
         initial_file = open(string_or_file, "r")
         print("Найден файл:")
         date_to_insert_into_file_name = str(datetime.datetime.today())[:19].replace(" ", "_").replace(":", "-")
-        name_of_new_output_file = "output_file_created_on_"+date_to_insert_into_file_name+"_based_on"+initial_file.name+".txt"
+        name_of_new_output_file = "output_file_created_on_"+date_to_insert_into_file_name+"_based_on" + \
+                                  initial_file.name+".txt"
         output_file = open(name_of_new_output_file, "w")
         line = initial_file.readline()
         new_line = ""
-        if line.find(" " * 4) == line.find("\t") == -1:
+
+        line_find_four_spaces = line.find(" " * 4)
+        line_find_tab = line.find("\t")
+        if line_find_four_spaces == line_find_tab == -1:
             print(rf"{line}")
             print("Результат: переданный файл не содержит символов табуляции или четырех пробелов подряд")
-        elif line.find("\t") == -1 or line.find(" " * 4) < line.find("\t"):
+        elif line_find_tab == -1 or line_find_four_spaces < line_find_tab:
             new_line = line.replace(" " * 4, "\t")
             print("%r" % new_line)
             print(f"Результат: каждые четыре пробела подряд в переданном файле были заменены "
                   f"на символы табуляции и сохранены в {name_of_new_output_file}")
-        elif line.find(" " * 4) == -1 or line.find("\t") < line.find(" " * 4):
+        elif line_find_four_spaces == -1 or line_find_tab < line_find_four_spaces:
             new_line = line.replace("\t", " " * 4)
             print("%r" % new_line)
             print(f"Результат: каждый символ табуляции в переданном файле был заменен "
@@ -34,20 +38,23 @@ def whitespace_switch(string_or_file):
         output_file.close()
         print('-' * 30)
     except IOError:
+        string_or_file_find_tab = string_or_file.find("\t")
+        string_or_file_find_four_spaces = string_or_file.find(" " * 4)
         print("Файл не найден\n")
         print(f"Найдена строка: \n\"{string_or_file}\"")
-        print("Расположение первого символа табуляции: ", string_or_file.find("\t"))
-        print("Расположение первых четырех пробелов подряд: ", string_or_file.find(" " * 4))
-        if string_or_file.find("\t") == -1 and string_or_file.find(" " * 4) == -1:
+        print("Расположение первого символа табуляции: ", string_or_file_find_tab)
+        print("Расположение первых четырех пробелов подряд: ", string_or_file_find_four_spaces)
+        if string_or_file_find_tab == -1 and string_or_file_find_four_spaces == -1:
             print(rf"{string_or_file}")
             print("Результат : переданная строка не содержит символов табуляции или четырех пробелов подряд")
-        elif string_or_file.find("\t") == -1 or string_or_file.find(" "*4) < string_or_file.find("\t"):
-            new_string = string_or_file.replace(" "*4, "\t")
-            print("\nРезультат преобразования: \n\"%r\"" % new_string)
+        elif string_or_file_find_four_spaces != -1 and \
+                (string_or_file_find_tab == -1 or string_or_file_find_four_spaces < string_or_file_find_tab):
+            new_string = string_or_file.replace(" " * 4, "\t")
+            print("\nРезультат преобразования: \n%r" % new_string)
             print("(каждые четыре пробела подряд в переданной строке были заменены на символы табуляции)")
-        else:#elif string_or_file.find(" " * 4) == -1 or string_or_file.find("\t") < string_or_file.find(" "*4):
-            new_string = string_or_file.replace("\t", " "*4)
-            print("\nРезультат преобразования: \n\"%r\"" % new_string)
+        else:
+            new_string = string_or_file.replace("\t", " " * 4)
+            print("\nРезультат преобразования: \n%r" % new_string)
             print("(каждый символ табуляции в переданной строке был заменен на четыре пробела подряд)")
         print('-' * 30)
 
@@ -68,12 +75,12 @@ if __name__ == "__main__":
     whitespace_switch(str1)
     whitespace_switch(str2)
     whitespace_switch(str3)
-    whitespace_switch(str4) # failed строка содержит ТОЛЬКО символы табуляции, и интерпретатор,
+    whitespace_switch(str4)  # failed строка содержит ТОЛЬКО символы табуляции, и интерпретатор,
     # похоже, преобразует их все в четыре пробела
-    whitespace_switch(str5) # строка ОДНОВРЕМЕННО содержит символы табуляции и 4 пробела подряд, предположительно
-    # поэтому, интерпретатор, не преобразует здесь табуляцию в 4 пробела
-
-    whitespace_switch(file0)
-    whitespace_switch(file1)
-    whitespace_switch(file2)
-    whitespace_switch(file3)
+    # whitespace_switch(str5) # строка ОДНОВРЕМЕННО содержит символы табуляции и 4 пробела подряд, предположительно
+    # # поэтому, интерпретатор, не преобразует здесь табуляцию в 4 пробела
+    #
+    # whitespace_switch(file0)
+    # whitespace_switch(file1)
+    # whitespace_switch(file2)
+    # whitespace_switch(file3)

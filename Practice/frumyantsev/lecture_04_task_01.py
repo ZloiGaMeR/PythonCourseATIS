@@ -4,12 +4,16 @@ def fizz_buzz_func():
     выводит Fizz, вместо чисел, кратных пяти — Buzz.
     Если число кратно пятнадцати, то выводит слово FizzBuzz.
     """
-    while (number := input("Введите число от одного до ста: ")).isdigit() and (int(number) in range(1, 101)):
-        if int(number) % 15 == 0:
+    while (number := input("Введите число от одного до ста: ")).isdigit() and \
+            ((number := int(number)) in range(1, 101)):
+    # while (number := input("Введите число от одного до ста: ")).isdigit() and \
+    #         (number := int(number)) and (number in range(1, 101)): # альтернативный вариант
+        # print(number)
+        if number % 15 == 0:
             print("FizzBuzz")
-        elif int(number) % 3 == 0:
+        elif number % 3 == 0:
             print("Fizz")
-        elif int(number) % 5 == 0:
+        elif number % 5 == 0:
             print("Buzz")
         else:
             print(number)

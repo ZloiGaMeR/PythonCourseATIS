@@ -6,9 +6,8 @@ def number_slicer():
     while not ((some_string := input("Введите пятизначное число: ")).isdigit() and len(some_string) == 5):
         pass
     else:
-        five_digit_number = [(i+1, some_string[i]) for i in range(len(some_string))]
-        for item in five_digit_number:
-            print(f"{item[0]} цифра равна {item[1]}")
+        for i in range(len(some_string)):
+            print(f"{i+1} цифра равна {some_string[i]}")
     return None
 
 
