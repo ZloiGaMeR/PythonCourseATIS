@@ -9,34 +9,32 @@ def whitespace_switch(string_or_file):
     print("\n")
 
     try:
-        initial_file = open(string_or_file, "r")
-        print("Найден файл:")
-        date_to_insert_into_file_name = str(datetime.datetime.today())[:19].replace(" ", "_").replace(":", "-")
-        name_of_new_output_file = "output_file_created_on_"+date_to_insert_into_file_name+"_based_on" + \
-                                  initial_file.name+".txt"
-        output_file = open(name_of_new_output_file, "w")
-        line = initial_file.readline()
-        new_line = ""
+        with open(string_or_file, "r") as initial_file:
+            print("Найден файл:")
+            date_to_insert_into_file_name = str(datetime.datetime.today())[:19].replace(" ", "_").replace(":", "-")
+            name_of_new_output_file = "output_file_created_on_"+date_to_insert_into_file_name+"_based_on" + \
+                                      initial_file.name+".txt"
+            with open(name_of_new_output_file, "w") as output_file:
+                line = initial_file.readline()
+                new_line = ""
 
-        line_find_four_spaces = line.find(" " * 4)
-        line_find_tab = line.find("\t")
-        if line_find_four_spaces == line_find_tab == -1:
-            print(rf"{line}")
-            print("Результат: переданный файл не содержит символов табуляции или четырех пробелов подряд")
-        elif line_find_four_spaces != -1 and (line_find_tab == -1 or line_find_four_spaces < line_find_tab):
-            new_line = line.replace(" " * 4, "\t")
-            print(rf"{new_line}")
-            print(f"Результат: каждые четыре пробела подряд в переданном файле были заменены "
-                  f"на символы табуляции и сохранены в {name_of_new_output_file}")
-        elif line_find_four_spaces == -1 or line_find_tab < line_find_four_spaces:
-            new_line = line.replace("\t", " " * 4)
-            print(rf"{new_line}")
-            print(f"Результат: каждый символ табуляции в переданном файле был заменен "
-                  f"на четыре пробела подряд и сохранен в {name_of_new_output_file}")
-        output_file.write(new_line)
-        initial_file.close()
-        output_file.close()
-        print('-' * 30)
+                line_find_four_spaces = line.find(" " * 4)
+                line_find_tab = line.find("\t")
+                if line_find_four_spaces == line_find_tab == -1:
+                    print(rf"{line}")
+                    print("Результат: переданный файл не содержит символов табуляции или четырех пробелов подряд")
+                elif line_find_four_spaces != -1 and (line_find_tab == -1 or line_find_four_spaces < line_find_tab):
+                    new_line = line.replace(" " * 4, "\t")
+                    print(rf"{new_line}")
+                    print(f"Результат: каждые четыре пробела подряд в переданном файле были заменены "
+                          f"на символы табуляции и сохранены в {name_of_new_output_file}")
+                elif line_find_four_spaces == -1 or line_find_tab < line_find_four_spaces:
+                    new_line = line.replace("\t", " " * 4)
+                    print(rf"{new_line}")
+                    print(f"Результат: каждый символ табуляции в переданном файле был заменен "
+                          f"на четыре пробела подряд и сохранен в {name_of_new_output_file}")
+                output_file.write(new_line)
+            print('-' * 30)
     except IOError:
         string_or_file_find_tab = string_or_file.find("\t")
         string_or_file_find_four_spaces = string_or_file.find(" " * 4)
