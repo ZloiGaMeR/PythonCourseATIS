@@ -16,10 +16,10 @@ template = "\n\n\n\tДорогой <addressee>!\n\n\t<how> спешу сообщ
 
 
 def interpolate(stri, **kwargs):
-    for item in kwargs:
-        stri = stri.replace(item, kwargs[item])
+    for key, value in kwargs.items():
+        stri = stri.replace(key, value)
     print(stri)
-    return None
+    return stri
 
 
 if __name__ == "__main__":
