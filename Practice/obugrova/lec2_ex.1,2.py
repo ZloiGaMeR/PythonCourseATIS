@@ -1,14 +1,17 @@
-def biggest (a, b):
+def biggest(a, b):
     if a > b:
-        print (a)
+        print(a)
     else:
-        print (b)
-biggest (2, 3)
+        print(b)
+biggest(2, 3)
 
-def returnbiggest (a, b):
+
+def returnbiggest(a, b):
     if a > b:
         return a
     else:
         return b
+
+
 c = returnbiggest(8, 7)
 print(c)
