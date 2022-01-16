@@ -7,7 +7,7 @@ def selection_sort(lst: list):
     for i in range(len(lst)):
         min_lst_ind = i
         j = i + 1
-        while i < j < len(lst):
+        while j < len(lst):
             if lst[j] < lst[min_lst_ind]:
                 min_lst_ind = j
             j += 1
