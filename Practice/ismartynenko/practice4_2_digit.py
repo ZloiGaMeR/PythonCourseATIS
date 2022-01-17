@@ -1,7 +1,6 @@
-digit = input("Введите 5-ти значное число: ")
-print("Число:", digit)
-while len(digit) != 5:
-    digit = input("Введите 5-ти значное число: ")
+while len(digit := input("Введите 5-ти значное число: ")) != 5:
+    continue
 else:
+    print("Число:", digit)
     for i, value in enumerate(digit, 1):
         print(f'{i} цифра равна {value}')
