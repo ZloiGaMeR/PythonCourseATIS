@@ -1,3 +1,5 @@
-aux_files/new_file.py
-aux_files/name_gen.py
+aux_files/beginning_of_cource_etal/new_file.py
+aux_files/beginning_of_cource_etal/name_gen.py
 /aux_files
+/.idea
+/venv
