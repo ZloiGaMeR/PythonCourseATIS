@@ -1,5 +1,3 @@
-# Sport club
-
 class Position:
     def __init__(self, money):
         self.money = money
@@ -21,21 +19,15 @@ class Employee:
         return f"Employee {self._name} {self._surname} with {self.__free_time}"
 
 
-class Sportsman:
-    def __init__(self, team, *args, **kwargs):
+class TaxPayer:
+    def __init__(self, state, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._team = team
+        self._state = state
 
 
-class Footballer(Sportsman):
-    def __init__(self, team, league, *args, **kwargs):
-        super().__init__(team, *args, **kwargs)
-        self._league = league
-
-
-class Manager(Employee, Footballer):
+class Manager(Employee, TaxPayer):
     def __init__(self, name, surname, salary, employees=tuple()):
-        super().__init__(name, surname, salary, 'Spartak', 'Premier league')
+        super().__init__(name, surname, salary, 'Russia')
         # Альтернативный вызов конструкторов, если в родительских
         # классах не предусмотрены вызовы super().__init__(*args, **kwargs):
         # super().__init__(name, surname, salary)
@@ -48,5 +40,4 @@ class Manager(Employee, Footballer):
 
 e1 = Employee("Ivan", "Ivanov", 50000)
 m = Manager("Petr", "Petrov", 100000, (e1,))
-print(m._league)
-print(m._team)
+print(m._state)
