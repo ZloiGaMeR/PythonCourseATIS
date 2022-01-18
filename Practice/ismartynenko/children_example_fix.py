@@ -15,7 +15,7 @@ for i in range(int(num)):
         child = input('child: ')
         if child:
             children.append(child)
-    people.append({'name': name, 'surname': surname, 'children': children})
+    people.append({'name': name, 'surname': surname, 'children': children[3:]})
 
 for i, each in enumerate(people, 1):
     print(f'{i}: {each}')
