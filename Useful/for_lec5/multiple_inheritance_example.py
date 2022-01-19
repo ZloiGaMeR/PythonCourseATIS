@@ -19,25 +19,19 @@ class Employee:
         return f"Employee {self._name} {self._surname} with {self.__free_time}"
 
 
-class ExampleBase:
-    def __init__(self, attr, *args, **kwargs):
+class TaxPayer:
+    def __init__(self, state, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._attr = attr
+        self._state = state
 
 
-class Player(ExampleBase):
-    def __init__(self, attr, sport, *args, **kwargs):
-        super().__init__(attr, *args, **kwargs)
-        self._sport = sport
-
-
-class Manager(Employee, Player):
-    def __init__(self, name, surname, salary, employees=tuple()):
-        super().__init__(name, surname, salary, 'attr', 'football')
+class Manager(Employee, TaxPayer):
+    def __init__(self, name, surname, salary, state, employees=tuple()):
+        super().__init__(name, surname, salary, state)
         # Альтернативный вызов конструкторов, если в родительских
         # классах не предусмотрены вызовы super().__init__(*args, **kwargs):
         # super().__init__(name, surname, salary)
-        # super(Employee, self).__init__('football')
+        # super(Employee, self).__init__(state)
         self._employees = employees
 
     def __repr__(self):
@@ -45,6 +39,5 @@ class Manager(Employee, Player):
 
 
 e1 = Employee("Ivan", "Ivanov", 50000)
-m = Manager("Petr", "Petrov", 100000, (e1,))
-print(m._sport)
-print(m._attr)
+m = Manager("Petr", "Petrov", 100000, 'Russia', (e1,))
+print(m._state)
