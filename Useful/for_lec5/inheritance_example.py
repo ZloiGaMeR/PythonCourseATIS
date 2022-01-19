@@ -26,12 +26,12 @@ class TaxPayer:
 
 
 class Manager(Employee, TaxPayer):
-    def __init__(self, name, surname, salary, employees=tuple()):
-        super().__init__(name, surname, salary, 'Russia')
+    def __init__(self, name, surname, salary, state, employees=tuple()):
+        super().__init__(name, surname, salary, state)
         # Альтернативный вызов конструкторов, если в родительских
         # классах не предусмотрены вызовы super().__init__(*args, **kwargs):
         # super().__init__(name, surname, salary)
-        # super(Employee, self).__init__('Premier league')
+        # super(Employee, self).__init__(state)
         self._employees = employees
 
     def __repr__(self):
@@ -39,5 +39,5 @@ class Manager(Employee, TaxPayer):
 
 
 e1 = Employee("Ivan", "Ivanov", 50000)
-m = Manager("Petr", "Petrov", 100000, (e1,))
+m = Manager("Petr", "Petrov", 100000, 'Russia', (e1,))
 print(m._state)
