@@ -1,5 +1,5 @@
 class Tank:
-    __x = 0  #  _Tank__x
+    _x = 0
     _speed = 0
     _power = 0
 
@@ -7,11 +7,13 @@ class Tank:
         pass
 
     def show(self):
-        print(f'Tank {type(self)} at {self.__x}')
+        print(f'Tank {type(self)} at {self._x}')
 
     def move(self):
-        self.__x += self._speed
-        # self._Tank__x = self._Tank__x + speed
+        self._x += self._speed
+
+    def __lt__(self, other):
+        return self._power < other._power
 
 
 class T34(Tank):
@@ -23,16 +25,11 @@ class T34(Tank):
 
 
 class Tiger(Tank):
-    __x = 0  # _Tiger__x
     _speed = 20
     _power = 40
 
     def shoot(self):
         print("Ba-ba-bah")
-
-    def move(self):
-        self.__x += self._speed
-        # self._Tiger__x = self._Tiger__x + self._speed
 
 
 class T90(Tank):
@@ -43,24 +40,13 @@ class T90(Tank):
         print("Ba-buh")
 
 
-class Abrams(T34, Tank):
-    _speed = 40
-    _power = 40
-
-
-tanks = [T34(), Tiger(), T90(), Abrams()]
-while True:
-    for x, y in enumerate(tanks):
-        print(f"{x} - {type(y)}")
-    i = int(input('Input tank index:'))
-    tanks[i].show()
-    tanks[i].move()
-    tanks[i].shoot()
-    tanks[i].show()
-    print(tanks[i].__dict__)
-    print(type(tanks[i]).__dict__)
-    tanks[i]._Tank__x += 1000
-
-
-
-
+if __name__ == "__main__":
+    tanks = [T34(), Tiger(), T90()]
+    while True:
+        for x, y in enumerate(tanks):
+            print(f"{x} - {type(y)}")
+        i = int(input('Input tank index:'))
+        tanks[i].show()
+        tanks[i].move()
+        tanks[i].shoot()
+        tanks[i].show()
