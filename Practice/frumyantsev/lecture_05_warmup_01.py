@@ -7,6 +7,7 @@ def mymax(arguments):
         if i > max_val:
             max_val = i
     print(max_val)
+
     # for i in range(len(arguments)):
     #     if arguments[i] > max_val:
     #         max_val = arguments[i]
