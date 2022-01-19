@@ -12,6 +12,7 @@ max_value = maximum(a)
 print(max_value)
 
 
+
 # Razminka 2
 a = [10, 20, 30, 40]
 for i in range(len(a)):
