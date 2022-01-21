@@ -2,10 +2,8 @@
 # Необходимо реализовать функцию, которая удаляет столбец, который содержит заданную цифру.
 def matrix_remover(number, matrix):
     for i in matrix:
-        print(f"{i=}")
         count = 0
         while count in range(len(i)):
-            print(f"{i[count]}")
             if i[count] == number:
                 for k in matrix:
                     print(k.pop(count))
