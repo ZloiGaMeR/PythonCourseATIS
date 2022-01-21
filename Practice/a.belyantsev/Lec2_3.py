@@ -8,7 +8,7 @@ class GameSetup:
     MAX_TANK_SPEED = 10
     MAX_TANK_ROT_SPEED = 10
     MAX_TANK_WEAPON_POWER = 30
-    rank_val = {'Примарх': 6, 'Магистр Ордена': 5, 'Библиарий': 4, 'Капелан': 3, 'Командир роты': 2, 'Боевой брат': 1}
+    RANK_VAL = {'Примарх': 6, 'Магистр Ордена': 5, 'Библиарий': 4, 'Капелан': 3, 'Командир роты': 2, 'Боевой брат': 1}
 
 
 class Tank:
@@ -70,7 +70,7 @@ class Commander:
         '''
         Функция подсчёта мощности командира, в зависимости от его параметров
         '''
-        return GameSetup.rank_val.get(self.rank, 0.5) * self.exp * self.accuracy * self.familiarity_tank
+        return GameSetup.RANK_VAL.get(self.rank, 0.5) * self.exp * self.accuracy * self.familiarity_tank
 
     def info(self):
         '''

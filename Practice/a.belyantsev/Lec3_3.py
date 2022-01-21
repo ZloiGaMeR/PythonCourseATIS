@@ -7,8 +7,7 @@ import random
 
 def random_generator(a, b):
     if a > b:
-        print(f"Компьютер загадал число в диапазоне от {b} до {a} включительно")
-        return random.randint(b, a)
+        a, b = b, a
     print(f"Компьютер загадал число в диапазоне от {a} до {b} включительно")
     return random.randint(a, b)
 
@@ -21,9 +20,10 @@ x = random_generator(int(a), int(b))
 while 1:
     temp = input("Как вы думаете, какое число загадал компьютер? ")
     if temp.isdecimal():
-        if int(temp) > x:
+        temp = int(temp)
+        if temp > x:
             print("Не верно, загаданное число меньше")
-        elif int(temp) < x:
+        elif temp < x:
             print("Не верно, загаданное число больше")
         else:
             print(f"Вы угадали! Загданное число {temp}")

@@ -5,7 +5,7 @@ while 1:
     if temp.lower() == "stop":
         break
     if temp.isdecimal():
-        number = number + temp
+        number += temp
     else:
         print("Введеный символ не является цифрой")
 

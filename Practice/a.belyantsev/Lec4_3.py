@@ -10,8 +10,9 @@
 
 def sort(in_arr):
     for i in range(len(in_arr)):
-        index = in_arr.index(min(in_arr[i:]), i)
-        in_arr[i], in_arr[index] = in_arr[index], in_arr[i]
+        for j in range(len(in_arr)):
+            if in_arr[j] > in_arr[i]:
+                in_arr[i], in_arr[j] = in_arr[j], in_arr[i]
     return in_arr
 
 

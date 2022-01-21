@@ -1,5 +1,6 @@
 def palindrome(word):
-    if word.lower() == word[::-1].lower():
+    word = word.lower()
+    if word == word[::-1]:
         return True
     return False
 

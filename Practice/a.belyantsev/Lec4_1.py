@@ -4,10 +4,10 @@
 pr = ""
 for i in range(101):
     pr = i
-    if i % 3 == 0:
-        pr = "Fizz"
-    if i % 5 == 0:
-        pr = "Buzz"
     if i % 15 == 0:
         pr = "FizzBuzz"
+    elif i % 5 == 0:
+        pr = "Buzz"
+    elif i % 3 == 0:
+        pr = "Fizz"
     print(pr)
