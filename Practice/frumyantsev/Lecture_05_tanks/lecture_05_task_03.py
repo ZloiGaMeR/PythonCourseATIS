@@ -4,8 +4,6 @@ import time
 
 
 class WrapStrToFile:
-    _filepath = ''
-    _content = ''
 
     def __init__(self):
         self._filepath = mktemp(dir=os.curdir)
@@ -14,22 +12,20 @@ class WrapStrToFile:
     def content(self):
         try:
             with open(self._filepath, 'r') as f:
-                _content = f.readline()
-                return f"{_content}"
+                # _content = f.readline()
+                return f"{f.readline()}"
         except FileNotFoundError:
             return "Файл пока не создан."
-            pass
 
     @content.setter
     def content(self, value):
-        self._filepath = self._filepath
         with open(self._filepath, 'w') as f:
-            self._content = f.write(value)
+            # self._content = f.write(value)
+            f.write(value)
 
     @content.deleter
     def content(self):
         os.remove(self._filepath)
-        pass
 
 
 if __name__ == "__main__":
