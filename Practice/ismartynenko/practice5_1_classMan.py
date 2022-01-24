@@ -7,5 +7,6 @@ class Man:
         return "I'm not ready yet"
 
 
-e = Man("John")
-print(e.name, Man.solve_task())
+if __name__ == "__main__":
+    e = Man("John")
+    print(e.name, Man.solve_task())
