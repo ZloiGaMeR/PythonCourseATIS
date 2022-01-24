@@ -26,6 +26,7 @@ class MyClass(Child1, Child2):
     def __init__(self, *args, **kwargs):
         print(f"MyClass")
         super().__init__(*args, **kwargs)
+        super(Parent1, self).__init__(*args, **kwargs)
 
 
 m = MyClass()

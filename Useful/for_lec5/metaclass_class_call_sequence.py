@@ -1,3 +1,5 @@
+# type.__call()__ -> __new__() -> [новый экземпляр появляется в памяти] -> __init__()
+
 class Base(type):
     _obj = None
 
