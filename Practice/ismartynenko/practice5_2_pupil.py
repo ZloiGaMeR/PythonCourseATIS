@@ -7,7 +7,7 @@ class Pupil(Man):
     def solve_task(self):
         sec = random.randint(3, 6)
         time.sleep(sec)
-        super().solve_task()
+        return super().solve_task()
 
 
 e1 = Man("John")
