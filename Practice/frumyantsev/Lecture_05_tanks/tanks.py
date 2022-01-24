@@ -27,6 +27,30 @@ class Tank:
     def __str__(self):
         return self._name
 
+    @property
+    def speed(self):
+        return self._speed
+
+    @speed.setter
+    def speed(self, value):
+        self._speed = value
+
+    @property
+    def power(self):
+        return self._power
+
+    @power.setter
+    def power(self, value):
+        self._power = value
+
+    @property
+    def x(self):
+        return self.__x
+
+    @x.setter
+    def x(self, value):
+        self.__x = value
+
 
 class T34(Tank):
     _name = "T34"

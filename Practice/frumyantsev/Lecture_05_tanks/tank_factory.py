@@ -18,7 +18,7 @@ def factory(d):
         #     # print(f"{k=}, {v=}")
         #     new_tank = k()
         #     lst_tanks.append(new_tank)
-    # lst_tanks = sorted(lst_tanks, key=lambda x: x._power)
+    # lst_tanks = sorted(lst_tanks, key=lambda x: x.power)
     lst_tanks.sort()
     print(f"Список созданных танков, отсортированный по мощи:\n{lst_tanks}")
 
@@ -27,13 +27,13 @@ def factory(d):
     passed_power = int(input("Укажите новую мощь для всех создаваемых танков: "))
     passed_coord = int(input("Укажите новую начальную координату для всех создаваемых танков: "))
     for tank in lst_tanks:
-        tank._speed = passed_speed
-        tank._power = passed_power
-        tank._Tank__x = passed_coord
+        tank.speed = passed_speed
+        tank.power = passed_power
+        tank.x = passed_coord
     print(f"\nСписок созданных танков, с измененными ТТХ:\n{lst_tanks}\n")
     for tank in lst_tanks:
         tank.show()
-        print(f"New tank speed: {tank._speed}; new tank power: {tank._power}\n")
+        print(f"New tank speed: {tank.speed}; new tank power: {tank.power}\n")
 
     return None
 
