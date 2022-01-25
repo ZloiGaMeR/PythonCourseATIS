@@ -3,11 +3,12 @@
 # Если число кратно пятнадцати, то программа должна выводить слово FizzBuzz.
 pr = ""
 for i in range(101):
-    pr = i
     if i % 15 == 0:
         pr = "FizzBuzz"
     elif i % 5 == 0:
         pr = "Buzz"
     elif i % 3 == 0:
         pr = "Fizz"
+    else:
+        pr = i
     print(pr)

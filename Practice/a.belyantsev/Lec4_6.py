@@ -3,19 +3,19 @@
 def matrix_remover(number, matrix):
     for i in matrix:
         count = 0
-        while count in range(len(i)):
+        while count < len(i):
             if i[count] == number:
                 for k in matrix:
-                    print(k.pop(count))
-                count = 0
-            count += 1
+                    k.pop(count)
+            else:
+                count += 1
     return matrix
 
 
 listoflists = [
-    [2, 3, 7, 2],
-    [6, 3, 2, 3],
-    [1, 9, 5, 5]
+    [2, 3, 4, 2],
+    [6, 3, 1, 3],
+    [1, 3, 5, 5]
 ]
 value = 2
 print(listoflists)

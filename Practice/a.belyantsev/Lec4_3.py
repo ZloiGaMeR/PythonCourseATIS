@@ -9,7 +9,7 @@
 # // на выходе должен получиться список, содержащий [0, 2, 3, 3, 7, 24]
 
 def sort(in_arr):
-    for i in range(len(in_arr)):
+    for i in range(len(in_arr[1::])):
         for j in range(len(in_arr)):
             if in_arr[j] > in_arr[i]:
                 in_arr[i], in_arr[j] = in_arr[j], in_arr[i]
