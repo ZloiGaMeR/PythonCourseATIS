@@ -8,5 +8,6 @@ class Singleton:
 
 
 s1 = Singleton()
-s2 = Singleton()
-assert(id(s1) == id(s2))  # True
+print(type(s1))
+# s2 = Singleton()
+# assert(id(s1) == id(s2))  # True
