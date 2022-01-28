@@ -12,15 +12,14 @@ import tempfile
 
 class WrapStrToFile:
     def __init__(self):
-        self.filepath = tempfile.mktemp()
+        self._filepath = tempfile.mktemp()
         # здесь инициализируется атрибут filepath, он содержит путь до файла-хранилища
 
     @property
     def content(self):
         try:
-            f = open(self.filepath, "r")
-            temp = f.read()
-            f.close()
+            with open(self._filepath, "r") as f:
+                temp = f.read()
             return temp
         except FileNotFoundError:
             print("File doesn't exist")
@@ -30,14 +29,13 @@ class WrapStrToFile:
 
     @content.setter
     def content(self, value):
-        f = open(self.filepath, "w")
-        f.write(value)
-        f.close()
+        with open(self._filepath, "w") as f:
+            f.write(value)
         # попытка записи в файл указанного содержимого
 
     @content.deleter
     def content(self):
-        os.remove(self.filepath)
+        os.remove(self._filepath)
         # удаляем файл: os.remove(имя_файла)
 
 
