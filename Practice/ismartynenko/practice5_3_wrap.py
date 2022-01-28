@@ -5,15 +5,14 @@ from tempfile import mktemp
 class WrapStrToFile:
     def __init__(self): 
         # здесь инициализируется атрибут filepath, он содержит путь до файла-хранилища
-        global filepath
-        filepath = mktemp()
+        self.__filepath = mktemp()
 
     @property 
     def content(self): 
         # попытка чтения из файла, в случае успеха возвращаем содержимое 
         # в случае неудачи возвращаем 'File doesn't exist'
         try:
-            with open(filepath, "r") as fp:
+            with open(self.__filepath, "r") as fp:
                 text = fp.read()
         except FileNotFoundError:
             print("File doesn't exist")
@@ -23,13 +22,13 @@ class WrapStrToFile:
     @content.setter
     def content(self, value): 
         # попытка записи в файл указанного содержимого
-        with open(filepath, "w") as fp:
+        with open(self.__filepath, "w") as fp:
             fp.write(value)
 
     @content.deleter 
     def content(self): 
         # удаляем файл: os.remove(имя_файла)
-        os.remove(filepath)
+        os.remove(self.__filepath)
 
 
 wstf = WrapStrToFile()
