@@ -3,10 +3,10 @@ import time
 
 class CtxMgrTimeMeter:
     def __enter__(self):
-        self.t = time.perf_counter()
+        self._t = time.perf_counter()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        print(f"Time spent for inner code: {time.perf_counter() - self.t}")
+        print(f"Time spent for inner code: {time.perf_counter() - self._t}")
 
 
 if __name__ == "__main__":
