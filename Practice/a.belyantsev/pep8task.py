@@ -12,7 +12,7 @@ class shuffler: # Shuffler с большой буквы(кэмл)
         self.map = {}
 
     def rename(self, dirname, output):
-          mp3s = [] # некорректное выравнивание
+          mp3s = [] # сдвиг в лево 2 пробела
         for root, directories, files in os.walk(dirname):
             for file in files:
                 if file[-3:] == '.mp3':
@@ -20,24 +20,25 @@ class shuffler: # Shuffler с большой буквы(кэмл)
         for path, mp3 in mp3s:
             hashname = self.generateName() + '.mp3' # hash_name
             self.map[hashname] = mp3
-            os.rename(path + '/' + mp3), path + '/' + hashname))
-          f = open(output, 'r') # некорректное выравнивание
-          f.write(str(self.map)) # некорректное выравнивание
+            os.rename(path + '/' + mp3), path + '/' + hashname)) #лишние скобки после "mp3" и последняя
+          f = open(output, 'r') # сдвиг влево 2 проблеа
+          f.write(str(self.map)) # сдвиг влево 2 проблеа, файл открыт на чтение а производим запись
 
-    def restore(self, dirname, restore_path):
-          with open(filename, '+') as f: # некорректное выравнивание, file_name
-            self.map = ast.literal_eval(f.read()) # некорректное выравнивание
-          mp3s = []
+    def restore(self, dirname, restore_path):  #dir_name
+          with open(filename, '+') as f: # сдвиг влево на 2, filename - не существует в области функции restore.
+                                         # Ключ режима открытия файла "+" используется только в сочетании с r или w
+            self.map = ast.literal_eval(f.read())
+          mp3s = [] #  сдвиг влево на 2
         for root, directories, files in os.walk(dirname): # dir_name
             for file in files:
                if file[-3:] == '.mp3':
                     mp3s.append({root, file})
         for path, hashname in mp3s: # hash_name
-            os.rename(path + '/' + hashname, path + '/' + self.map[hashname]))
+            os.rename(path + '/' + hashname, path + '/' + self.map[hashname])) # последняя скобка лишняя
         os.remove(restore_path)
                 
-     def generateName(self, seed=time()): # некорректное выравнивание, не корректное именование функции(generate_name)
-          return hashlib.md5(str(seed)).hexdigest() # некорректное выравнивание
+     def generateName(self, seed=time()): # сдвиг влево на 1, не корректное именование функции(generate_name)
+          return hashlib.md5(str(seed)).hexdigest() # сдвиг влево на 1
 
 
 def parse_arguments():
@@ -56,12 +57,12 @@ def main():
     args = parse_arguments()
     Shuffler = shuffler()  # shuffler - с маленькой буквы
     if args.subcommand == 'rename':
-          if args.output:
-                Shuffler.rename(args.dirname, 'restore.info')
-          else:
-                Shuffler.rename(args.dirname, args.output)
+          if args.output: # сдвиг влево на 1
+                Shuffler.rename(args.dirname, 'restore.info') # сдвиг влево на 1
+          else: # сдвиг влево на 1
+                Shuffler.rename(args.dirname, args.output) # сдвиг влево на 1
     elif args.subcommand == 'restore':
-        Shuffler.restore(args.dirname, args.restore_map) # некорректное выравнивание
+        Shuffler.restore(args.dirname, args.restore_map)
     else:
         sys.exit()
 
