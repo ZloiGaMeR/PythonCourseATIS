@@ -14,14 +14,8 @@
 # [12, 24]
 
 
-def multiplier(m=1, source=None):
-    if source is None:
-        source = [1, 2, 3]
-    result = []
-    for i, x in enumerate(source):
-        result.append(x*m)
-        # result[i] *= m
-    return result
+def multiplier(m=1, source=(1, 2, 3)):
+    return [x * m for x in source]
 
 
 print(multiplier(5))

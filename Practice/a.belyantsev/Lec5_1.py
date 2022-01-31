@@ -16,4 +16,8 @@ class Man:
 class Pupil(Man):
     def solve_task(self):
         time.sleep(random.randint(3, 6))
-        print("I'm not ready yet")
+        super().solve_task()
+
+
+p = Pupil("Name")
+p.solve_task()
