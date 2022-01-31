@@ -1,4 +1,4 @@
-class ParagraphReader:
+class ParagraphReader: 
 
     def __init__(self, file, prgrf_char):
         self._prgrf_char = prgrf_char
