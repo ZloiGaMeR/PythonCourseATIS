@@ -1,45 +1,46 @@
-# import datetime
-
-
 class ParagraphReader:
 
     def __init__(self, file, prgrf_char):
-        self.lst = []
-        self.file = file
-        self.prgrf_char = prgrf_char
-        self.i = 0
-        self.par = ''
-        # print(self.prgrf_char)
+        self._prgrf_char = prgrf_char
+        self._par = ''
+        self._f = open(file, 'r')
+        self._stop_iter = 0
         pass
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        with open(self.file, 'r') as f:
-            try:
-                chr = f.read()[self.i]
-                # print(f"{chr=}")
-                if chr != self.prgrf_char:
-                    self.par += chr
-                    self.i += 1
-                else:
-                    self.i += 1
-                    res = self.par
-                    self.par = ''
-                    return res
-                # print(f"{self.i=}")
-            except IndexError:
-                # print("IndexError")
+        while self._f:
+            self._chr = self._f.read(1)
+            if self._stop_iter == 1:
                 raise StopIteration
-        # print(f"{self.par=}")
+            if self._chr == '':
+                self._stop_iter = 1
+                return self._par
+            elif self._chr == self._prgrf_char:
+                res = self._par
+                self._par = ''
+                return res
+            else:
+                self._par += self._chr
+
+    def __del__(self):
+        self._f.close()
 
 
-txt1 = ParagraphReader('text0', 'r')
+dct_txt = {}
+dct_txt[0] = ParagraphReader('text0.txt', 'r')
+dct_txt[1] = ParagraphReader('text1.txt', '\n')
+dct_txt[2] = ParagraphReader('text2.txt', '\t')
 
-lst = []
-for ln in txt1:
-    if ln:
-        lst.append(ln)
+lists = [i for i in range(3)]
 
-print(lst)
+dct = {k: [] for k in lists}
+
+for i in range(3):
+    for ln in dct_txt[i]:
+        dct[i].append(ln)
+
+for k in dct:
+    print(dct[k])
