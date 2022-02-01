@@ -32,12 +32,14 @@ lst_txt.append(ParagraphReader('text0.txt', 'r'))
 lst_txt.append(ParagraphReader('text1.txt', '\n'))
 lst_txt.append(ParagraphReader('text2.txt', '\t'))
 
-lists = []
-for it in lst_txt:
-    lst = []
-    for ln in it:
-        lst.append(ln)
-    lists.append(lst)
+# lists = []
+# for it in lst_txt:
+#     lst = []
+#     for ln in it:
+#         lst.append(ln)
+#     lists.append(lst)
+
+lists = [[ln for ln in it] for it in lst_txt]
 
 for lst in lists:
     print(lst)
