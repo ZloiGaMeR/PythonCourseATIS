@@ -4,7 +4,7 @@ class ParagraphReader:
         self._prgrf_char = prgrf_char
         self._par = ''
         self._f = open(file, 'r')
-        self._stop_iter = 0
+        self._stop_iter = False
 
     def __iter__(self):
         return self
@@ -12,10 +12,10 @@ class ParagraphReader:
     def __next__(self):
         while self._f:
             self._chr = self._f.read(1)
-            if self._stop_iter == 1:
+            if self._stop_iter:
                 raise StopIteration
             if self._chr == '':
-                self._stop_iter = 1
+                self._stop_iter = True
                 return self._par
             elif self._chr == self._prgrf_char:
                 res = self._par
