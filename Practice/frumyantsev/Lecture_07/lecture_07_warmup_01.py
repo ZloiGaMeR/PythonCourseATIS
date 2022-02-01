@@ -1,11 +1,10 @@
-class ParagraphReader: 
+class ParagraphReader:
 
     def __init__(self, file, prgrf_char):
         self._prgrf_char = prgrf_char
         self._par = ''
         self._f = open(file, 'r')
         self._stop_iter = 0
-        pass
 
     def __iter__(self):
         return self
@@ -29,18 +28,17 @@ class ParagraphReader:
         self._f.close()
 
 
-dct_txt = {}
-dct_txt[0] = ParagraphReader('text0.txt', 'r')
-dct_txt[1] = ParagraphReader('text1.txt', '\n')
-dct_txt[2] = ParagraphReader('text2.txt', '\t')
+lst_txt = []
+lst_txt.append(ParagraphReader('text0.txt', 'r'))
+lst_txt.append(ParagraphReader('text1.txt', '\n'))
+lst_txt.append(ParagraphReader('text2.txt', '\t'))
 
-lists = [i for i in range(3)]
+lists = []
+for it in lst_txt:
+    lst = []
+    for ln in it:
+        lst.append(ln)
+    lists.append(lst)
 
-dct = {k: [] for k in lists}
-
-for i in range(3):
-    for ln in dct_txt[i]:
-        dct[i].append(ln)
-
-for k in dct:
-    print(dct[k])
+for lst in lists:
+    print(lst)
