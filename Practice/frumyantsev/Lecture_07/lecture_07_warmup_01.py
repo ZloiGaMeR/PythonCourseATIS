@@ -10,10 +10,8 @@ class ParagraphReader:
         return self
 
     def __next__(self):
-        while self._f:
+        while not self._stop_iter:
             self._chr = self._f.read(1)
-            if self._stop_iter:
-                raise StopIteration
             if self._chr == '':
                 self._stop_iter = True
                 return self._par
@@ -23,6 +21,7 @@ class ParagraphReader:
                 return res
             else:
                 self._par += self._chr
+        raise StopIteration
 
     def __del__(self):
         self._f.close()
