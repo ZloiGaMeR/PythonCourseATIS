@@ -2,18 +2,17 @@ class Reader:
     def __init__(self, p):
         self._sym = "|"
         self._f = open(p, "r")
-        self.eof = False
+        self._eof = False
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        buffer = ""
-        char = self._f.read(1)
-
-        if self.eof:
+        if self._eof:
             raise StopIteration
 
+        buffer = ""
+        char = self._f.read(1)
         while char != "":
             if char != self._sym:
                 buffer += char
@@ -21,7 +20,7 @@ class Reader:
             else:
                 break
         else:
-            self.eof = True
+            self._eof = True
         return buffer
 
     def __del__(self):
