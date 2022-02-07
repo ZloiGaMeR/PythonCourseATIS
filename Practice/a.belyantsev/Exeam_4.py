@@ -9,7 +9,13 @@ import shutil
 # Предусмотреть случаи ошибочных аргументов (например, шаг == 0). (5 баллов)
 
 
-def myrange(stop, step=1, start=0):
+def myrange(start, stop, step):
+    if start is None:
+        start = 0
+
+    if step is None:
+        step = 1
+
     out = [start, ]
     i = 1
     if step == 0:
@@ -26,7 +32,7 @@ def myrange(stop, step=1, start=0):
         return out
 
 
-print(myrange(-10, -2, 9))
+print(myrange(9, -10, -2))
 
 # Написать реализацию функции format. (5 баллов, с re – 7 баллов)
 #
@@ -36,12 +42,11 @@ print(myrange(-10, -2, 9))
 # 'coordinates: 37.4N, 18.3W'
 
 
-def myformat(*args):
-    out_str = args[0]
+def myformat(out_str, *args):
     i = 0
-    while i < len(args) - 1:
+    while i < len(args):
         regexp = '{' + str(i) + '?' + '}'
-        out_str = re.sub(regexp, args[i + 1], out_str, 1)
+        out_str = re.sub(regexp, args[i], out_str, 1)
         i += 1
     return out_str
 
@@ -58,7 +63,7 @@ def copydir(source, destination):
     if os.path.exists(source) and os.path.exists(destination):
         file_list = os.listdir(source)
         for file in file_list:
-            shutil.copy(os.path.join(source, file), destination)
+            shutil.copyfile(os.path.join(source, file), os.path.join(destination, file))
         print("Ready!")
     else:
         print(f"source: {source} or destination: {destination} is not exist")
