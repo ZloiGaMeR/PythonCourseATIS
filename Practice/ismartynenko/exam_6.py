@@ -1,18 +1,17 @@
 import re
 
 
-def myformat(*args):
-    mystr = args[0]
-    obj = re.findall(r'{\d}', args[0])
+def myformat(mystr, *args):
+    obj = re.findall(r'{\d}', mystr)
     if len(obj) != 0:
-        arr = re.findall(r'\d', args[0])
+        arr = re.findall(r'\d', mystr)
         for i in range(len(obj)):
-            mystr = re.sub(r"{\d}", args[int(arr[i])+1], mystr, 1)
+            mystr = re.sub(r"{\d}", args[int(arr[i])], mystr, 1)
         print(mystr)
     else:
-        obj = re.findall('{}', args[0])
+        obj = re.findall('{}', mystr)
         for i in range(len(obj)):
-            mystr = re.sub("{}", args[i + 1], mystr, 1)
+            mystr = re.sub("{}", args[i], mystr, 1)
         print(mystr)
 
 
