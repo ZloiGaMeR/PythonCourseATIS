@@ -18,7 +18,7 @@ def my_range(*args):
         print("Problem with arguments. Exit")
         exit()
 
-    if stop > 0:
+    if step > 0:
         while (cond := start + i * step) < stop:
             i += 1
             lst.append(cond)
@@ -29,5 +29,7 @@ def my_range(*args):
     return lst
 
 
-res = my_range(10, 20, 0)
-print(res)
+res = my_range(10, 20, 1)
+res2 = my_range(20, 10, -1)
+res3 = my_range(-20, -10, 1)
+print(res, res2, res3)
