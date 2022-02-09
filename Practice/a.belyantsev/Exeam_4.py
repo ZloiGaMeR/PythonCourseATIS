@@ -9,12 +9,18 @@ import shutil
 # Предусмотреть случаи ошибочных аргументов (например, шаг == 0). (5 баллов)
 
 
-def myrange(start, stop, step):
-    if start is None:
+def myrange(*args):
+    if len(args) == 2:
         start = 0
-
-    if step is None:
-        step = 1
+        stop = args[0]
+        step = args[1]
+    elif len(args) == 3:
+        start = args[0]
+        stop = args[1]
+        step = args[2]
+    else:
+        print("Arguments are not correct")
+        return None
 
     out = [start, ]
     i = 1
@@ -31,7 +37,8 @@ def myrange(start, stop, step):
             i += 1
         return out
 
-
+print(myrange())
+print(myrange(10, 1))
 print(myrange(9, -10, -2))
 
 # Написать реализацию функции format. (5 баллов, с re – 7 баллов)
@@ -58,13 +65,23 @@ print(myformat('{1}, {0}, {2}', 'a', 'b', 'c'))
 # Написать функцию copydir - копирование директории с использованием copyfile,
 # а также проверки на существование source и destination. (5 баллов)
 
+def copyfile(source, destination):
+    with open(source, "r") as read_f, open(destination, "x") as write_f:
+        write_f.write(read_f.read())
+
 
 def copydir(source, destination):
     if os.path.exists(source) and os.path.exists(destination):
-        file_list = os.listdir(source)
-        for file in file_list:
-            shutil.copyfile(os.path.join(source, file), os.path.join(destination, file))
+        for file in os.listdir(source):
+            temp_source = os.path.join(source, file)
+            temp_destination = os.path.join(destination, file)
+            if os.path.isdir(temp_source):
+                os.makedirs(temp_destination)
+                copydir(temp_source, temp_destination)
+            else:
+                copyfile(temp_source, temp_destination)
         print("Ready!")
+        #     shutil.copyfile(os.path.join(source, file), os.path.join(destination, file))
     else:
         print(f"source: {source} or destination: {destination} is not exist")
 
