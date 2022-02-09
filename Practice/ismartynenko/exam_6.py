@@ -10,12 +10,11 @@ def myformat(mystr, *args):
         arr = re.findall(r'\d', mystr)
         for i in range(len(obj)):
             mystr = re.sub(regexp_c1, args[int(arr[i])], mystr, 1)
-        return mystr
     else:
         obj = re.findall(regexp_c2, mystr)
         for i in range(len(obj)):
             mystr = re.sub(regexp_c2, args[i], mystr, 1)
-        return mystr
+    return mystr
 
 
 print(myformat('{1}, {0}, {2}', 'a', 'b', 'c'))
