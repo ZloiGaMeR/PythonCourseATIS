@@ -2,25 +2,31 @@
 # для рублей и для копеек. Дробная часть (копейки) при выводе на экран должна быть отделена от целой части запятой.
 # Необходимо реализовать сложение, вычитание, деление сумм и операции сравнения.
 # Также нужно добавить атрибут текущий курс по доллару и метод перевода по текущему курсу в доллары
+import math
 
 
 class Money:
-    def __init__(self, rubls, pennies):
-        self._rubls = rubls
-        self._pennies = pennies
+    def __init__(self, rubles, pennies):
+        if pennies % 1 == 0:
+            tmp = math.modf(rubles + float(pennies/100))
+            self._rubles = tmp[1]
+            self._pennies = tmp[0]
+        else:
+            self._rubles = rubles
+            self._pennies = pennies
         self._current_curse = 35
 
     @property
-    def number_of_rubls(self):
-        return self._rubls
+    def number_of_rubles(self):
+        return self._rubles
 
-    @number_of_rubls.setter
-    def number_of_rubls(self, value):
-        self._rubls = value
+    @number_of_rubles.setter
+    def number_of_rubles(self, value):
+        self._rubles = value
 
-    @number_of_rubls.deleter
-    def number_of_rubls(self):
-        self._rubls = 0
+    @number_of_rubles.deleter
+    def number_of_rubles(self):
+        self._rubles = 0
 
     @property
     def number_of_pennies(self):
@@ -47,70 +53,66 @@ class Money:
         self._current_curse = 0
 
     def __str__(self):
-        return f"smm is {self._rubls + float(self._pennies/100)}"
+        return f"smm is {round(self._rubles + self._pennies,2)}"
 
     def __add__(self, other):
-        _m = Money(0, 0)
-        _m.number_of_rubls = self.number_of_rubls + other.number_of_rubls
-        _m.number_of_pennies = self.number_of_pennies + other.number_of_pennies
-        return _m
+        rubles = self.number_of_rubles + other.number_of_rubles
+        pennies = self.number_of_pennies + other.number_of_pennies
+        return Money(rubles, pennies)
 
     def __sub__(self, other):  # (x - y).
-        _m = Money(0, 0)
-        _m.number_of_rubls = self.number_of_rubls - other.number_of_rubls
-        _m.number_of_pennies = self.number_of_pennies - other.number_of_pennies
-        return _m
+        rubles = self.number_of_rubles - other.number_of_rubles
+        pennies = self.number_of_pennies - other.number_of_pennies
+        return Money(rubles, pennies)
 
     def __mul__(self, other):  # (x * y).
-        _m = Money(0, 0)
-        _m.number_of_rubls = self.number_of_rubls * other.number_of_rubls
-        _m.number_of_pennies = self.number_of_pennies * other.number_of_pennies
-        return _m
+        rubles = self.number_of_rubles * other.number_of_rubles
+        pennies = self.number_of_pennies * other.number_of_pennies
+        return Money(rubles, pennies)
 
     def __truediv__(self, other):  # (x / y).
-        _m = Money(0, 0)
-        _m.number_of_rubls = self.number_of_rubls / other.number_of_rubls
-        _m.number_of_pennies = self.number_of_pennies / other.number_of_pennies
-        return _m
+        rubles = self.number_of_rubles / other.number_of_rubles
+        pennies = self.number_of_pennies / other.number_of_pennies
+        return Money(rubles, pennies)
 
     def __lt__(self, other):  # x < y
-        return (self.number_of_rubls + float(self.number_of_pennies/100)) < \
-               (other.number_of_rubls + float(other.number_of_pennies/100))
+        return (self.number_of_rubles + float(self.number_of_pennies/100)) < \
+               (other.number_of_rubles + float(other.number_of_pennies/100))
 
     def __le__(self, other):  # x ≤ y
-        return (self.number_of_rubls + float(self.number_of_pennies/100)) <= \
-               (other.number_of_rubls + float(other.number_of_pennies/100))
+        return (self.number_of_rubles + float(self.number_of_pennies/100)) <= \
+               (other.number_of_rubles + float(other.number_of_pennies/100))
 
     def __eq__(self, other):  # x == y
-        return (self.number_of_rubls + float(self.number_of_pennies/100)) == \
-               (other.number_of_rubls + float(other.number_of_pennies/100))
+        return (self.number_of_rubles + float(self.number_of_pennies/100)) == \
+               (other.number_of_rubles + float(other.number_of_pennies/100))
 
     def __ne__(self, other):  # x != y
-        return (self.number_of_rubls + float(self.number_of_pennies/100)) != \
-               (other.number_of_rubls + float(other.number_of_pennies/100))
+        return (self.number_of_rubles + float(self.number_of_pennies/100)) != \
+               (other.number_of_rubles + float(other.number_of_pennies/100))
 
     def __gt__(self, other):  # x > y
-        return (self.number_of_rubls + float(self.number_of_pennies/100)) > \
-               (other.number_of_rubls + float(other.number_of_pennies/100))
+        return (self.number_of_rubles + float(self.number_of_pennies/100)) > \
+               (other.number_of_rubles + float(other.number_of_pennies/100))
 
     def __ge__(self, other):  # x ≥ y
-        return (self.number_of_rubls + float(self.number_of_pennies/100)) >= \
+        return (self.number_of_rubles + float(self.number_of_pennies/100)) >= \
                (other.number_of_rubls + float(other.number_of_pennies/100))
 
     def convertor(self):
-        return str((self.number_of_rubls + float(self.number_of_pennies/100))/self.current_curse) + " $"
+        return str((self.number_of_rubles + self.number_of_pennies)/self.current_curse) + " $"
 
 
-m1 = Money(0, 0)
+m1 = Money(35, 0)
 # print(m1)
 m2 = Money(1, 10)
-m3 = Money(2, 20)
+m3 = Money(2, 310)
 # print(m2)
-m = m1 + m2 + m3
+m = m1 + m2 - m3
 print(m)
-print(type(m))
-# print(m1-m2)
-print(m1 < m2)
-print(m1 > m2)
-print(m1/m2)
+# print(type(m))
+# # print(m1-m2)
+# print(m1 < m2)
+# print(m1 > m2)
+# print(m1/m2)
 print(m1.convertor())

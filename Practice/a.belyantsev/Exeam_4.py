@@ -22,24 +22,24 @@ def myrange(*args):
         print("Arguments are not correct")
         return None
 
-    out = [start, ]
-    i = 1
+    out = []
+    i = 0
     if step == 0:
         return print("Step should not be 0")
     if step > 0:
-        while start + i * step < stop:
-            out.append(start + i*step)
-            i += 1
-        return out
+        cmp = lambda x: x < stop
     else:
-        while start + i * step > stop:
-            out.append(start + i * step)
-            i += 1
-        return out
+        cmp = lambda x: x > stop
+    while cmp(start + i * step):
+        out.append(start + i * step)
+        i += 1
+    return out
 
+
+print(myrange(1, 10, -1))
 print(myrange())
 print(myrange(10, 1))
-print(myrange(9, -10, -2))
+print(myrange(9, -10, -1))
 
 # Написать реализацию функции format. (5 баллов, с re – 7 баллов)
 #
