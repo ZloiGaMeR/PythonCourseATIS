@@ -2,13 +2,13 @@
 # для рублей и для копеек. Дробная часть (копейки) при выводе на экран должна быть отделена от целой части запятой.
 # Необходимо реализовать сложение, вычитание, деление сумм и операции сравнения.
 # Также нужно добавить атрибут текущий курс по доллару и метод перевода по текущему курсу в доллары
-import math
+import math as _math
 
 
 class Money:
     def __init__(self, rubles, pennies):
-        if pennies % 1 == 0:
-            tmp = math.modf(rubles + float(pennies/100))
+        if isinstance(pennies, int):
+            tmp = _math.modf(rubles + float(pennies/100))
             self._rubles = tmp[1]
             self._pennies = tmp[0]
         else:
@@ -34,7 +34,12 @@ class Money:
 
     @number_of_pennies.setter
     def number_of_pennies(self, value):
-        self._pennies = value
+        if isinstance(value, int):
+            tmp = _math.modf(float(value/100))
+            self._rubles += tmp[1]
+            self._pennies = tmp[0]
+        else:
+            self._pennies = value
 
     @number_of_pennies.deleter
     def number_of_pennies(self):
@@ -54,6 +59,9 @@ class Money:
 
     def __str__(self):
         return f"smm is {round(self._rubles + self._pennies,2)}"
+
+    def __repr__(self):
+        return self._rubles + self._pennies
 
     def __add__(self, other):
         rubles = self.number_of_rubles + other.number_of_rubles
@@ -103,15 +111,16 @@ class Money:
         return str((self.number_of_rubles + self.number_of_pennies)/self.current_curse) + " $"
 
 
-m1 = Money(35, 0)
-# print(m1)
+m1 = Money(26, 0)
+m1.number_of_pennies = 900
+print(m1)
 m2 = Money(1, 10)
 m3 = Money(2, 310)
 # print(m2)
 m = m1 + m2 - m3
 print(m)
 # print(type(m))
-# # print(m1-m2)
+# print(m1-m2)
 # print(m1 < m2)
 # print(m1 > m2)
 # print(m1/m2)

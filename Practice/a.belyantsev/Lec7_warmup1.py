@@ -23,7 +23,7 @@ class MyIter:
             out_str += symbol
         return out_str
 
-    def __delete__(self, instance):
+    def __del__(self):
         self._file.close()
 
 

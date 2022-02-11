@@ -25,7 +25,8 @@ def myrange(*args):
     out = []
     i = 0
     if step == 0:
-        return print("Step should not be 0")
+        print("Step should not be 0")
+        return None
     if step > 0:
         cmp = lambda x: x < stop
     else:
@@ -38,7 +39,7 @@ def myrange(*args):
 
 print(myrange(1, 10, -1))
 print(myrange())
-print(myrange(10, 1))
+print(myrange(10, 0))
 print(myrange(9, -10, -1))
 
 # Написать реализацию функции format. (5 баллов, с re – 7 баллов)
@@ -81,7 +82,6 @@ def copydir(source, destination):
             else:
                 copyfile(temp_source, temp_destination)
         print("Ready!")
-        #     shutil.copyfile(os.path.join(source, file), os.path.join(destination, file))
     else:
         print(f"source: {source} or destination: {destination} is not exist")
 
