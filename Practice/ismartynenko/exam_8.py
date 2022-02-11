@@ -7,17 +7,13 @@ def copydir(src, dst):
     for i in os.walk(src):
         dir_and_files.append(i)
 
-    src_files = []
-    dst_files = []
     for i in dir_and_files:
         path = str(i[0]).replace(os.path.dirname(src), dst)
         os.mkdir(path)
         for j in i[2]:
-            src_files.append(os.path.join(i[0], j))
-            dst_files.append(os.path.join(path, j))
-
-    for i in range(len(src_files)):
-        copy_file(src_files[i], dst_files[i])
+            src_temp = os.path.join(i[0], j)
+            dsc_temp = os.path.join(path, j)
+            copy_file(src_temp, dsc_temp)
 
 
 source = r"C:\Users\dfyz\PycharmProjects\PythonCourseATIS\Practice\ismartynenko"
