@@ -7,7 +7,7 @@ def business_days(date1, date2):
     bd = 0
     d = d1
     while d < d2:
-        if d.weekday() in range(0, 5):
+        if d.weekday() < 5:
             # print(d.weekday())
             bd += 1
         d += dt.timedelta(days=1)
