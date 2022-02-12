@@ -12,4 +12,5 @@ st = by.decode(encoding='UTF-8')
 res = re.findall(r'git [a-z]+[\s]*[a-zA-Z/.:@]+', st)
 
 for rs in res:
-    print(rs)
+    print(f"{rs}")
+
