@@ -13,8 +13,8 @@ def monitoring(source):
             orig_files.append(os.path.join(i[0], j))
 
     # Monitoring
-    life_time_dir = 120
-    life_time_file = 60
+    LIFE_TIME_DIR = 120
+    LIFE_TIME_FILE = 60
     rm_dirs = {}
     rm_files = {}
     while True:
@@ -25,7 +25,7 @@ def monitoring(source):
                 rmdir_path = os.path.join(i[0], j)
                 if rmdir_path not in orig_dirs:
                     # Removal time for new folders
-                    rm_time_d = os.path.getctime(rmdir_path) + life_time_dir
+                    rm_time_d = os.path.getctime(rmdir_path) + LIFE_TIME_DIR
                     # dictionary {rm_dirs[rm_time_d]: path}
                     rm_dirs[rm_time_d] = rmdir_path
                     print(f"Directory {rmdir_path} will be remove at:   {time.ctime(rm_time_d)}")
@@ -34,13 +34,20 @@ def monitoring(source):
                 rmfile_path = os.path.join(i[0], j)
                 if rmfile_path not in orig_files:
                     # removal time for new files
-                    rm_time_f = os.path.getctime(rmfile_path) + life_time_file
+                    rm_time_f = os.path.getctime(rmfile_path) + LIFE_TIME_FILE
                     # dictionary {rm_files[rm_time_f]: path}
                     rm_files[rm_time_f] = rmfile_path
                     print(f"File {rmfile_path} will be removed at:  {time.ctime(rm_time_f)}")
         print("=========================================================================")
 
         time.sleep(refresh_time)
+
+        # Delete files
+        rm_files_cp = rm_files.copy()
+        for i in rm_files_cp.keys():
+            if i <= time.time():
+                os.remove(rm_files.get(i))
+                print(f"File {os.path.basename(rm_files.pop(i))} was removed")
 
         # Delete folders
         rm_dirs_cp = rm_dirs.copy()
@@ -50,17 +57,10 @@ def monitoring(source):
                     os.rmdir(rm_dirs.get(i))
                 except OSError:
                     print(f"Folder {rm_dirs.get(i)} is not empty.")
-                    print(f"Increase life time for folder on {life_time_dir}sec.")
-                    rm_dirs[i+life_time_dir] = rm_dirs.pop(i)
+                    print(f"Increase life time for folder on {LIFE_TIME_DIR}sec.")
+                    rm_dirs[i+LIFE_TIME_DIR] = rm_dirs.pop(i)
                 else:
                     print(F"Directory {os.path.basename(rm_dirs.pop(i))} was removed")
-
-        # Delete files
-        rm_files_cp = rm_files.copy()
-        for i in rm_files_cp.keys():
-            if i <= time.time():
-                os.remove(rm_files.get(i))
-                print(f"File {os.path.basename(rm_files.pop(i))} was removed")
 
 
 # Scan frequency
