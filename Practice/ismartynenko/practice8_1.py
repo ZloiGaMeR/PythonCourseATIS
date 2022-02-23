@@ -1,21 +1,13 @@
 def sorted_list(a):
-    # Sort list
-    # Тут я думал как мне не создавать новый список, но никак не выходило.
-    # хотел что то вроде: a.sort(key=lambda x: a.count(x)). Ну ладно,
-    # работаем с копией, но тут тогда другой момент
-    # почему не могу сделать так: lst_sort.sort(key=lambda x: lst_sort.count(x)) ???
-    lst_sort = a.copy()
-    lst_sort.sort(key=lambda x: a.count(x))
 
     # Create dictionary - d[element] = num
-    d = {}
-    for i in lst_sort:
-        d[i] = lst_sort.count(i)
+    d = {i: a.count(i) for i in a}
 
-    # Create list
-    lst_final = []
-    for i in d.keys():
-        lst_final.append(i)
+    # Create list keys from dictionary
+    lst_final = list(d)
+
+    # Sort list by dictionary values
+    lst_final.sort(key=lambda x: d[x])
 
     return lst_final
 
