@@ -2,5 +2,5 @@
 import re as _re
 with open("E:\GIT_Python\PythonCourseATIS\Practice\README.md", "r") as f:
     text_file = f.read()
-    regexp = _re.compile(r'git [-:/.@A-z ]+')
+    regexp = _re.compile(r'git [A-z]+(?: -{0,2}[@.:A-z ]+)*(?:-?[/.A-z ]*)')
     print(_re.findall(regexp, text_file))
