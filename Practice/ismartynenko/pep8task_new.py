@@ -3,7 +3,7 @@ import os
 import hashlib
 import ast
 import argparse
-from time import *
+from time import time
 
 
 class Shuffler:
@@ -68,4 +68,5 @@ def main():
         sys.exit()
 
 
-main()
+if __name__ == "__main__":
+    main()
