@@ -5,10 +5,7 @@ def sort_by_occurrence(lst):
     '''
     dct = {}
     for item in lst:
-        if item in dct:
-            dct[item] += 1
-        else:
-            dct[item] = 1
+        dct[item] = dct.get(item, 0) + 1
     lst = list(dct.keys())
     lst.sort(key=lambda x: dct[x], reverse=False)
     return lst

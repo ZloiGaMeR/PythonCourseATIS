@@ -39,7 +39,7 @@ class Shuffler:
         os.remove(restore_path)
         return None  # добавил в явной форме
 
-    def generate_name(self, seed=time()):
+    def generate_name(self, seed=time.time()):
         return hashlib.md5(str(seed)).hexdigest()
 
 
@@ -72,4 +72,3 @@ def main():
 
 if __name__ == '__main__':
     main() # убрал под if __name__ == '__main__':
-
