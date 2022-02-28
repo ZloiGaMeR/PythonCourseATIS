@@ -21,7 +21,8 @@ def is_prime(n):
         return False
 
     i = 3
-    while i <= sqrt(n):
+    sqrt_n = sqrt(n)
+    while i <= sqrt_n:
         if n % i == 0:
             return False
         i = i + 2
@@ -36,44 +37,38 @@ def find_primes(end, start=3):
 
 
 if __name__ == '__main__':
+    args = [(10000, 3), (20000, 10003), (30000, 20001)]
     print("Simple start")
     enter_time = time.time_ns()
-    find_primes(10000, 3)
-    find_primes(20000, 10003)
-    find_primes(30000, 20001)
+    for arg in args:
+        find_primes(arg[0], arg[1])
     exit_time1 = time.time_ns() - enter_time
     print("\nSimple end")
     print("Thread start")
-    t1 = Thread(target=find_primes, args=(10000, 3))
-    t2 = Thread(target=find_primes, args=(20000, 10003))
-    t3 = Thread(target=find_primes, args=(30000, 20001))
+    thread = []
     enter_time = time.time_ns()
-    t1.start()
-    t2.start()
-    t3.start()
-    t1.join()
-    t2.join()
-    t3.join()
+    for arg in args:
+        t = Thread(target=find_primes, args=arg)
+        t.start()
+        thread.append(t)
+    for t in thread:
+        t.join()
     exit_time2 = time.time_ns() - enter_time
     print("\nThread end")
     print("Process start")
-    # pool = mp.Pool(processes=3)
-    p1 = mp.Process(target=find_primes, args=(10000, 3))
-    p2 = mp.Process(target=find_primes, args=(20000, 10003))
-    p3 = mp.Process(target=find_primes, args=(30000, 20001))
     enter_time = time.time_ns()
-    # res = pool.map(find_primes, (10000, 3, 20000, 10003, 30000, 20001))
-    p1.start()
-    p2.start()
-    p3.start()
-    p1.join()
-    p2.join()
-    p3.join()
+    process = []
+    for arg in args:
+        p = mp.Process(target=find_primes, args=arg)
+        p.start()
+        process.append(p)
+    for p in process:
+        p.join()
     exit_time3 = time.time_ns() - enter_time
     print("\nProcess end")
     print(f"Simple start: {exit_time1 / 1000000000} sec. \n"
           f"Thread:       {exit_time2 / 1000000000} sec. \n"
-          f"Process:      {exit_time2 / 1000000000} sec.")
+          f"Process:      {exit_time3 / 1000000000} sec.")
 
 
 #  Резюме: Распараллеливание процессов или потоков в математических операциях приводит к увеличению времени исполнения

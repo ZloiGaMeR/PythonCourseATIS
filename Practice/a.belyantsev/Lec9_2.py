@@ -4,11 +4,11 @@ from multiprocessing import Pool
 
 
 def summ(a, b):
-    return a+b
+    return a + b
 
 
 if __name__ == '__main__':
     with Pool(processes=3) as p:
         res = p.starmap(summ, [(1, 2), ("1", "2"), ([1, 2, 3], [4, 5])])
-    for _ in res:
-        print(_)
+    for value in res:
+        print(value)

@@ -3,12 +3,12 @@ import os
 import hashlib
 import ast
 import argparse
-from time import *
+import time
 
 
 class Shuffler:
     def __init__(self):
-        self.map = {}
+        self._map = {}
 
     def rename(self, dir_name, output):
         mp3s = []
@@ -18,24 +18,24 @@ class Shuffler:
                     mp3s.append([root, file])
         for path, mp3 in mp3s:
             hash_name = self.generatename() + '.mp3'
-            self.map[hash_name] = mp3
+            self._map[hash_name] = mp3
             os.rename(path + '/' + mp3, path + '/' + hash_name)
         with open(output, 'w') as f:
-            f.write(str(self.map))
+            f.write(str(self._map))
 
     def restore(self, dir_name, restore_path):
         with open(dir_name, 'r+') as f:
-            self.map = ast.literal_eval(f.read())
+            self._map = ast.literal_eval(f.read())
         mp3s = []
         for root, directories, files in os.walk(dir_name):
             for file in files:
                 if file[-3:] == '.mp3':
                     mp3s.append({root, file})
         for path, hash_name in mp3s:
-            os.rename(path + '/' + hash_name, path + '/' + self.map[hash_name])
+            os.rename(path + '/' + hash_name, path + '/' + self._map[hash_name])
         os.remove(restore_path)
 
-    def generatename(self, seed=time()):
+    def generatename(self, seed=time.time()):
         return hashlib.md5(str(seed)).hexdigest()
 
 
