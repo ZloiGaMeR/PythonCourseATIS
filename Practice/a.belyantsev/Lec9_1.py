@@ -45,8 +45,8 @@ if __name__ == '__main__':
     exit_time1 = time.time_ns() - enter_time
     print("\nSimple end")
     print("Thread start")
-    thread = []
     enter_time = time.time_ns()
+    thread = []
     for arg in args:
         t = Thread(target=find_primes, args=arg)
         t.start()
