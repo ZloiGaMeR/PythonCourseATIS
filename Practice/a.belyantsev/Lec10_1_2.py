@@ -7,26 +7,6 @@ import pickle
 from Lec10_1_1 import coding, gen_dict
 
 
-def encoding_dictionary(offset=1):
-    abc = "abcdefghijklmnopqrstuvwxyz"
-    encoding_dict = {}
-    for letter in abc:
-        encoding_dict[letter] = abc[offset % 26]
-        offset += 1
-    return encoding_dict
-
-
-# def coding(in_dict, in_str):
-#     out_str = []
-#     tmp = ""
-#     for word in in_str:
-#         for letter in word:
-#             tmp += in_dict.get(letter)
-#         out_str.append(tmp)
-#         tmp = ""
-#     return out_str
-
-
 secret_list = ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = '127.0.0.1'
