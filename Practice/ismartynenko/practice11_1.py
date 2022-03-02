@@ -1,26 +1,31 @@
 import sqlite3
+import json
 
 
 class SqlWrapper:
-    def __init__(self):
-        self.conn = conn
-
+    # При входе в наш менеджер контекста - создаем соединение с БД
     def __enter__(self):
-        pass
+        self._db_name = "films.db"
+        self.conn = sqlite3.connect(self._db_name)
+        self.conn.row_factory = sqlite3.Row
 
+    # При выходе - завершаем соединение
     def __exit__(self, exc_type, exc_val, exc_tb):
-        pass
+        self.conn.close()
 
-    def select(self):
-        pass
+    # метод select
+    def select(self, query):
+        cur = self.conn.cursor()
+        cur.execute(query)
+        return json.dumps(cur.fetchall())
 
-    def execute(self):
-        cur = self.cursor()
+    # метод execute
+    def execute(self, query):
+        cur = self.conn.cursor()
+        cur.execute(query)
+        self.conn.commit()
 
 
-db_name = "films.db"
-conn = sqlite3.connect(db_name)
-conn.row_factory = sqlite3.Row
-
-req = SqlWrapper
-# req.execute("INSERT INTO films VALUES ")
+with SqlWrapper():
+    SqlWrapper.execute("INSERT INTO films (name, desc) VALUES ('Cool Film', 'SHORT LONG STORY')")
+    SqlWrapper.select("SELECT * FROM films")

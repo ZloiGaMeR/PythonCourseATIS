@@ -25,7 +25,7 @@ def find_primes(end, start=3):
         i = 2
         j = 0
         n = sqrt(start)
-        while i <= n and j != 1:
+        while i <= n:
             if start % i == 0:
                 j = 1
                 break
@@ -34,7 +34,7 @@ def find_primes(end, start=3):
         if j != 1:
             simple_nums.append(start)
         start += 1
-    # print(simple_nums)
+    print(simple_nums)
 
 
 if __name__ == '__main__':
