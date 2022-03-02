@@ -1,11 +1,22 @@
 import time
 import threading
 import multiprocessing
+from math import sqrt
 
 
 '''В случае с потоками и процессами без метода start функция не начнет выполняться
-С методом join обстоит иначе, в потоках начинается некорректная работа, то два из 3-ех отработает, то один.
-Процессы же не замечают если забыть указать join'''
+С методом join() обстоит иначе, в потоках начинается некорректная работа, то два из 3-ех отработает, то один.
+Процессы же не замечают если забыть указать join.
+
+One thread: 1.3745658
+=========================
+join() Threads: 1.5786332
+w/o join() Threads: 0.111361
+=========================
+join() Processes: 0.8879530999999999
+w/o join() Processes: 0.06469780000000001
+
+Полагаю что процессы/потоки медленнее с join() потому что уходит время на их завершение.'''
 
 
 def find_primes(end, start=3):
@@ -13,10 +24,11 @@ def find_primes(end, start=3):
     while start <= end:
         i = 2
         j = 0
-        while i*i <= start and j != 1:
+        n = sqrt(start)
+        while i <= n and j != 1:
             if start % i == 0:
                 j = 1
-                i += 1
+                break
             else:
                 i += 1
         if j != 1:
@@ -28,33 +40,31 @@ def find_primes(end, start=3):
 if __name__ == '__main__':
     print("One thread:", end=' ')
     t_start = time.perf_counter()
-    find_primes(10000)
-    find_primes(20000, 10001)
-    find_primes(30000, 20001)
+    find_primes(100000)
+    find_primes(200000, 100001)
+    find_primes(300000, 200001)
     print(time.perf_counter() - t_start)
+
+    args = ((100000,), (200000, 100001), (300000, 200001))
 
     print("Threads:", end=' ')
     t_start = time.perf_counter()
-    th1 = threading.Thread(target=find_primes, args=(10000,))
-    th2 = threading.Thread(target=find_primes, args=(20000, 10001))
-    th3 = threading.Thread(target=find_primes, args=(30000, 20001))
-    th1.start()
-    th2.start()
-    th3.start()
-    th1.join()
-    th2.join()
-    th3.join()
+    threads = []
+    for k in args:
+        thr = threading.Thread(target=find_primes, args=k)
+        thr.start()
+        threads.append(thr)
+    for thr in threads:
+        thr.join()
     print(time.perf_counter() - t_start)
 
     print("Processes:", end=' ')
     t_start = time.perf_counter()
-    mp1 = multiprocessing.Process(target=find_primes, args=(10000,))
-    mp2 = multiprocessing.Process(target=find_primes, args=(20000, 10001))
-    mp3 = multiprocessing.Process(target=find_primes, args=(30000, 20001))
-    mp1.start()
-    mp2.start()
-    mp3.start()
-    mp1.join()
-    mp2.join()
-    mp3.join()
+    processes = []
+    for k in args:
+        mp = multiprocessing.Process(target=find_primes, args=k)
+        mp.start()
+        processes.append(mp)
+    for mp in processes:
+        mp.join()
     print(time.perf_counter() - t_start)
