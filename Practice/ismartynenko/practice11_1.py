@@ -27,5 +27,5 @@ class SqlWrapper:
 
 
 with SqlWrapper():
-    SqlWrapper.execute("INSERT INTO films (name, desc) VALUES ('Cool Film', 'SHORT LONG STORY')")
-    SqlWrapper.select("SELECT * FROM films")
+    SqlWrapper.execute(query="INSERT INTO films (name, desc) VALUES ('Cool Film', 'SHORT LONG STORY')")
+    SqlWrapper.select(query="SELECT * FROM films")
